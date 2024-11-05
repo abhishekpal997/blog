@@ -14,7 +14,8 @@ connectiondb();
 // middleware
 app.use(cookieparser());
 app.use(cors({
-    origin: 'https://blog-app-abhishekpal.vercel.app', // Specify the origin to allow
+    origin: process.env.APP_URL,
+    credentials: true,
 }));
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
