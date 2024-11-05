@@ -7,13 +7,15 @@ import api from '../api/api';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+    // Input field configurations
     const input = [
         { name: 'username', label: 'Username', type: 'text', placeholder: 'Username', icon: 'ph:user-light' },
         { name: 'email', label: 'Email', type: 'email', placeholder: 'Email', icon: 'mdi-light:email' },
         { name: 'password', label: 'Password', type: 'password', placeholder: 'Password', icon: 'bitcoin-icons:key-outline' },
-        { name: 'image', label: 'Upload Avatar', type: 'file', }
+        { name: 'image', label: 'Upload Avatar', type: 'file' }
     ];
 
+    // State to hold form data
     const [userdata, setUserdata] = useState({
         username: '',
         email: '',
@@ -21,6 +23,9 @@ const Home = () => {
         image: null,
     });
 
+    const navigate = useNavigate();
+
+    // Handle input change for both text and file inputs
     const handleChange = (e) => {
         const { name, value, files } = e.target;
         if (name === 'image') {
@@ -30,31 +35,37 @@ const Home = () => {
         }
     };
 
-    const navigate = useNavigate();
-
+    // Form submission handler
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Prepare form data for submission
         const data = new FormData();
         Object.entries(userdata).forEach(([key, value]) => {
             data.append(key, value);
         });
+
         try {
+            // POST request to the API with form data
             const response = await axios.post(`${api}/api/user/register`, data, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
 
+            // Reset the form state on successful submission
             setUserdata({
                 username: '',
                 email: '',
                 password: '',
                 image: null,
             });
+
             console.log(response.data.user);
-            navigate('/user/dashboard')
+            navigate('/user/dashboard'); // Redirect to dashboard
+
         } catch (error) {
-            console.log(error);
+            console.error("Registration error:", error);
         }
     };
 
@@ -63,7 +74,7 @@ const Home = () => {
             <div className='container mx-auto'>
                 <div className='flex justify-center items-center h-screen'>
                     <div className='w-1/2 bg-white p-12 rounded-xl'>
-                        <form method='post' className='flex flex-col gap-3'>
+                        <form method='post' className='flex flex-col gap-3' onSubmit={handleSubmit}>
                             {input.map((item, index) => (
                                 item.type === 'file' ? (
                                     <File
@@ -89,7 +100,7 @@ const Home = () => {
                                 )
                             ))}
                             <div>
-                                <Button type='submit' onClick={handleSubmit} name='Submit' />
+                                <Button type='submit' name='Submit' />
                             </div>
                         </form>
                     </div>
