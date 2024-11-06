@@ -15,7 +15,7 @@ const notifyInfo = (msg) => {
 }
 
 const notifyWarning = (msg) => {
-    toast.warning(msg);
+    toast.warn(msg);
 }
 
 export { notifySuccess, notifyError, notifyInfo, notifyWarning };

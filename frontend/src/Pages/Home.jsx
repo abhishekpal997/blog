@@ -6,6 +6,7 @@ import axios from 'axios';
 import api from '../api/api';
 import { useNavigate } from 'react-router-dom';
 import { notifyError, notifySuccess } from '../Layouts/Toast';
+import { ToastContainer } from 'react-toastify';
 
 const Home = () => {
     // Input field configurations
@@ -67,48 +68,51 @@ const Home = () => {
 
         } catch (error) {
             notifyError(error.response?.data?.msg)
-            console.error("Registration error:", error);
+            console.error(error.response?.data?.msg);
         }
     };
 
     return (
-        <div className='bg-black'>
-            <div className='container mx-auto'>
-                <div className='flex justify-center items-center h-screen'>
-                    <div className='w-1/2 bg-white p-12 rounded-xl'>
-                        <form method='post' className='flex flex-col gap-3' onSubmit={handleSubmit}>
-                            {input.map((item, index) => (
-                                item.type === 'file' ? (
-                                    <File
-                                        key={index}
-                                        name={item.name}
-                                        label={item.label}
-                                        type={item.type}
-                                        className='hidden'
-                                        onChange={handleChange}
-                                    />
-                                ) : (
-                                    <Input
-                                        key={index}
-                                        name={item.name}
-                                        label={item.label}
-                                        type={item.type}
-                                        value={userdata[item.name]}
-                                        className='py-2 ps-10 outline-black border border-gray-300 rounded-lg relative bg-gray-50 focus:bg-transparent'
-                                        icon={item.icon}
-                                        placeholder={item.placeholder}
-                                        onChange={handleChange}
-                                    />
-                                )
-                            ))}
-                            <div>
-                                <Button type='submit' name='Submit' />
-                            </div>
-                        </form>
+        <>
+            <ToastContainer />
+            <div className='bg-black'>
+                <div className='container mx-auto'>
+                    <div className='flex justify-center items-center h-screen'>
+                        <div className='w-1/2 bg-white p-12 rounded-xl'>
+                            <form method='post' className='flex flex-col gap-3' onSubmit={handleSubmit}>
+                                {input.map((item, index) => (
+                                    item.type === 'file' ? (
+                                        <File
+                                            key={index}
+                                            name={item.name}
+                                            label={item.label}
+                                            type={item.type}
+                                            className='hidden'
+                                            onChange={handleChange}
+                                        />
+                                    ) : (
+                                        <Input
+                                            key={index}
+                                            name={item.name}
+                                            label={item.label}
+                                            type={item.type}
+                                            value={userdata[item.name]}
+                                            className='py-2 ps-10 outline-black border border-gray-300 rounded-lg relative bg-gray-50 focus:bg-transparent'
+                                            icon={item.icon}
+                                            placeholder={item.placeholder}
+                                            onChange={handleChange}
+                                        />
+                                    )
+                                ))}
+                                <div>
+                                    <Button type='submit' name='Submit' />
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 
