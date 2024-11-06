@@ -62,7 +62,7 @@ const Home = () => {
                 image: null,
             });
             notifySuccess(response.data.msg)
-            console.log(response.data.user);
+            console.log(response.data.msg);
             navigate('/user/dashboard'); // Redirect to dashboard
 
         } catch (error) {
