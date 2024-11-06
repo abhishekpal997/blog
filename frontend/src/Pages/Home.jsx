@@ -5,6 +5,7 @@ import Button from '../Layouts/Button';
 import axios from 'axios';
 import api from '../api/api';
 import { useNavigate } from 'react-router-dom';
+import { notifyerror, notifySuccess } from '../Layouts/Toast';
 
 const Home = () => {
     // Input field configurations
@@ -60,11 +61,12 @@ const Home = () => {
                 password: '',
                 image: null,
             });
-
+            notifySuccess(response.data.msg)
             console.log(response.data.user);
             navigate('/user/dashboard'); // Redirect to dashboard
 
         } catch (error) {
+            notifyerror(error.response?.data?.msg)
             console.error("Registration error:", error);
         }
     };
