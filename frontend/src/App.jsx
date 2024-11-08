@@ -4,8 +4,12 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Login from './Pages/Login/Login';
-import Dashboard from './Pages/Dashboard';
+import Admindashboard from './Pages/Admin/Admindashboard';
+import Userdashboard from './Pages/User/Userdashboard';
 import Register from './Pages/Login/Register';
+import UserLayout from './Pages/User/Layout/UserLayout';
+import AdminLayout from './Pages/Admin/Layouts/AdminLayout';
+import AllCategory from './Pages/Admin/AllCategory';
 
 const App = () => {
   return (
@@ -14,11 +18,12 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/user/*' >
-            <Route path='dashboard' element={<Dashboard />} />
+          <Route path='/user/*' element={<UserLayout />} >
+            <Route path='dashboard' element={<Userdashboard />} />
           </Route>
-          <Route path='/admin/*' >
-            <Route path='dashboard' element={<Dashboard />} />
+          <Route path='/admin/*' element={<AdminLayout />} >
+            <Route path='dashboard' element={<Admindashboard />} />
+            <Route path='all-category' element={<AllCategory />} />
           </Route>
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />

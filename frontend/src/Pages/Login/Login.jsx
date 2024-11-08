@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Input from '../../Layouts/Input';
 import Button from '../../Layouts/Button';
 import axios from 'axios';
@@ -28,6 +28,21 @@ const Login = () => {
         setUserdata({ ...userdata, [name]: value });
     };
 
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        const role = localStorage.getItem('role');
+        const username = localStorage.getItem('username');
+
+        if (token) {
+            if (role === 'admin') {
+                navigate('/admin/dashboard')
+            } else if (role === 'user') {
+                navigate('/user/dashboard')
+            }
+        }
+
+    }, [navigate])
+
     // Form submission handler
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -38,8 +53,10 @@ const Login = () => {
             // POST request to the API with form data
             const response = await axios.post(`${api}/api/user/login`, userdata);
 
-           localStorage.setItem('token', response.data.token);
-           localStorage.setItem('role', response.data.user.role);
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('role', response.data.user.role);
+            localStorage.setItem('username', response.data.user.username);
+           
 
             if (response.data.user.role === 'admin') {
                 navigate('/admin/dashboard');
@@ -52,7 +69,7 @@ const Login = () => {
                 password: '',
             });
             notifySuccess(response.data.msg)
-            console.log(response.data.msg);
+            console.log(response.data.user.username);
 
 
         } catch (error) {

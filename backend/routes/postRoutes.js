@@ -1,4 +1,5 @@
 const { postcreate, postget, postuserget, postlike } = require('../controllers/postController');
+const { isUser } = require('../middleware/VerifyToken');
 
 const router = require('express').Router();
 
