@@ -58,7 +58,7 @@ const postget = async (req, res) => {
 const postuserget = async (req, res) => {
     try {
         const user = await userModel.findOne({ username: req.params.username });
-        const post = await postModel.find({ author: user._id }).populate(['author', 'category']);
+        const post = await postModel.find({ author: user._id }).populate(['author', 'category','Comment']);
         res.status(200).json({ user, post, msg: 'post fetch by username' });
     } catch (error) {
         res.status(200).json({ error, msg: 'post fetch failed' });

@@ -7,6 +7,7 @@ const connectiondb = require('./config/db');
 const userRoutes = require('./routes/userRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const postRoutes = require('./routes/postRoutes');
+const commentRoutes = require('./routes/commentRoutes');
 //config
 dotenv.config();
 connectiondb();
@@ -21,6 +22,7 @@ app.use('/uploads', express.static('uploads'));
 app.use('/api/user', userRoutes);
 app.use('/api/category', categoryRoutes);
 app.use('/api/post', postRoutes);
+app.use('/api/comment', commentRoutes)
 
 const port = process.env.PORT;
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import api from '../api/api';
 
 const Table = ({ data, filter }) => {
     if (!data || data.length === 0) {
@@ -35,8 +36,10 @@ const Table = ({ data, filter }) => {
                                             : key === filter[2]
                                                 ? item.author?.[0]?.username
                                                 : key === filter[3]
-                                                    ? item.parent ? item.parent?.[0]?.name : "Null"
-                                                    : item[key]
+                                                    ? <img src={`${api}/uploads/blog/${item[key]}`} width={50} alt="" srcset="" />
+                                                    : key === filter[4]
+                                                        ? item.Comment.length
+                                                        : item[key]
 
                                     }
                                 </td>
