@@ -5,6 +5,7 @@ import axios from 'axios';
 import api from '../../api/api';
 import { useNavigate } from 'react-router-dom';
 import { notifyError, notifySuccess } from '../../Layouts/Toast';
+import { Helmet } from 'react-helmet';
 
 
 const Login = () => {
@@ -56,7 +57,7 @@ const Login = () => {
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('role', response.data.user.role);
             localStorage.setItem('username', response.data.user.username);
-           
+
 
             if (response.data.user.role === 'admin') {
                 navigate('/admin/dashboard');
@@ -80,7 +81,10 @@ const Login = () => {
 
     return (
         <>
-
+            <Helmet>
+                <title>Login</title>
+                <meta name='description' content='Login Page' />
+            </Helmet>
             <div className='bg-black'>
                 <div className='container mx-auto'>
                     <div className='flex justify-center items-center h-screen'>

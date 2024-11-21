@@ -44,7 +44,7 @@ const Dashboard = () => {
                 setUser(response.data.user || null);
 
                 // Update `author` in `blogpost` once `user` data is set
-                setBlogpost({...blogpost, author: response.data.user._id})
+                setBlogpost({ ...blogpost, author: response.data.user._id })
             } catch (error) {
                 console.error("Error fetching posts:", error);
             }
@@ -117,7 +117,7 @@ const Dashboard = () => {
 
             console.log(response.data.post);
             notifySuccess(response.data.msg || "Post created successfully");
-            fetchPost();
+            setUserpost([...userpost, response.data.post])
         } catch (error) {
             console.error("Error creating post:", error);
             notifyError(error.response?.data?.msg || "Error creating post.");

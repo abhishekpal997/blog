@@ -27,7 +27,7 @@ const Dashboard = () => {
             try {
                 const response = await axios.get(`${api}/api/post/get`);
                 setUserallpost(response.data.post);
-                console.log(response.data.post);
+                console.log(response.data.post[0].createdAt.slice(0,10));
 
             } catch (error) {
                 console.log(error);
