@@ -83,7 +83,8 @@ const Login = () => {
         <>
             <Helmet>
                 <title>Login</title>
-                <meta name='description' content='Login Page' />
+                <meta name="description" content="This is an awesome page." />
+                <meta name="keywords" content="React, SEO, Helmet" />
             </Helmet>
             <div className='bg-black'>
                 <div className='container mx-auto'>
